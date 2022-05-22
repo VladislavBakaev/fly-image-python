@@ -41,9 +41,9 @@ class AccountSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data.get('user'))
         return Account.objects.create_account(user=user,
-                                              first_name=validated_data['first_name'],
-                                              last_name=validated_data['last_name'],
-                                              telegramm=validated_data['telegramm'])
+                                              first_name=validated_data.get('first_name',''),
+                                              last_name=validated_data.get('last_name',''),
+                                              telegramm=validated_data.get('telegramm', ''))
 
 
 class LoginSerializer(serializers.Serializer):
