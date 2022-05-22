@@ -104,7 +104,7 @@ class FlyCreateView(APIView):
         new_fly.robot_type = data.get('robot', None)
         new_fly.camera_type = data.get('camera', None)
         new_fly.commentary = data.get('commentary', None)
-        # new_fly.save()
+        new_fly.save()
         
         for image_name in files:
             new_image = FlyImage()
