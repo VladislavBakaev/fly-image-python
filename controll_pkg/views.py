@@ -43,7 +43,7 @@ class ProjectsCreateView(APIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         try:
-            Project.objects.create(
+            new_project = Project.objects.create(
                 name=serializer.data['name'],
                 author=account,
                 at_create=datetime.now(),
@@ -52,7 +52,7 @@ class ProjectsCreateView(APIView):
         except IntegrityError as e:
             return Response({'errors':['Название проекта должно быть уникальным']},status=status.HTTP_400_BAD_REQUEST)
         
-        return Response({}, status.HTTP_201_CREATED)
+        return Response({'id':new_project.pk}, status.HTTP_201_CREATED)
 
 class ProjectDeleteView(APIView):
     permission_classes = (IsAuthenticated,)
