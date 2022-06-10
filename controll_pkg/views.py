@@ -122,6 +122,7 @@ class FlyCreateView(APIView):
         new_fly.robot_type = data.get('robot', None)
         new_fly.camera_type = data.get('camera', None)
         new_fly.commentary = data.get('commentary', None)
+        new_fly.images_coords = json.dumps(data.get('coords', []))
         new_fly.save()
         
         for image_name in files:

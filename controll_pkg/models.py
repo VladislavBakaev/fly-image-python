@@ -20,6 +20,7 @@ class Fly(models.Model):
     robot_type = models.CharField(null=True, max_length=100)
     camera_type = models.CharField(null=True, max_length=100)
     commentary = models.TextField(null=True)
+    images_coords = models.TextField()
     
     class Meta:
         db_table = "flying"
