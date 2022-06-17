@@ -2,7 +2,7 @@ from django.db import models
 from authentication.models import Account
 
 class Project(models.Model):
-    author = models.ForeignKey(Account, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(Account, on_delete=models.DO_NOTHING, db_constraint=False)
     name = models.CharField(max_length=100, unique=True)
     at_create = models.DateTimeField()
     at_update = models.DateTimeField()

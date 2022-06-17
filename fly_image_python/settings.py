@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-4om0rngsr&_lmoq#c6mvampi%e5_#aq*=80_lo%m+a59^-_$$s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://*.ydata.ru']
 
 AUTH_USER_MODEL = 'authentication.User'
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
+    "http://172.16.255.151:8080"
 ]
 
 MIDDLEWARE = [
@@ -119,6 +121,10 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
 
 
