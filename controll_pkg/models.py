@@ -28,7 +28,7 @@ class Fly(models.Model):
 
 class ObservationObjectChronology(models.Model):
     author = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     at_create = models.DateTimeField()
     at_update = models.DateTimeField()
     name = models.CharField(max_length=100)
@@ -49,10 +49,10 @@ class FlyImage(models.Model):
         
 
 class ObservationObject(models.Model):
-    chronology = models.ForeignKey(ObservationObjectChronology, on_delete=models.SET_NULL, null=True)
+    chronology = models.ForeignKey(ObservationObjectChronology, on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
     at_create = models.DateTimeField()
-    image = models.ForeignKey(FlyImage, on_delete=models.SET_NULL, null=True)
+    image = models.ForeignKey(FlyImage, on_delete=models.CASCADE, null=True)
     image_box = models.CharField(max_length=100)
     commentary = models.TextField()
     

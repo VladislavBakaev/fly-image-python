@@ -2,7 +2,7 @@ from django.urls import path
 from controll_pkg.views import ProjectsView, FlyView, ObjectsView,\
                                ProjectsCreateView, FlyCreateView,\
                                ObjectsCreateView, ProjectDeleteView,\
-                               FlyDeleteView
+                               FlyDeleteView, ObjectsDeleteView
 
 app_name = 'authentication'
 urlpatterns = [
@@ -15,5 +15,6 @@ urlpatterns = [
     path('fly/delete', FlyDeleteView.as_view()),
     
     path('object/get', ObjectsView.as_view()),
-    path('object/create', ObjectsCreateView.as_view())
+    path('object/create', ObjectsCreateView.as_view()),
+    path('object/delete', ObjectsDeleteView.as_view())
 ]
