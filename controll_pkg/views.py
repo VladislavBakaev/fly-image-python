@@ -163,6 +163,26 @@ class FlyCreateView(APIView):
         
         return Response({}, status=status.HTTP_201_CREATED)
 
+
+class FlyDeleteView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
+    def delete(self, request):
+        account = Account.objects.get(user=request.user)
+        try:
+            fly = Fly.objects.get(id = request.data.get('id'))
+        except:
+            return Response({'error':'invalid id: {0}'.format(request.data.get('id'))}, status=status.HTTP_400_BAD_REQUEST)
+
+        if fly.author == account:
+            fly.delete()
+        else:
+            return Response({'error':'forbiden'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+        return Response({}, status.HTTP_200_OK)
+
+
 class ObjectsView(APIView):
     def get(self, request):
         target_id = request.query_params.get('project_id', None)
