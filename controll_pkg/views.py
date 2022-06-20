@@ -265,3 +265,21 @@ class ObjectsDeleteView(APIView):
         
         
         return Response({}, status.HTTP_200_OK)
+
+
+class ObservationObjectChronologyDeleteView(APIView):
+    permission_classes = (IsAuthenticated,)
+    
+    def delete(self, request):
+        account = Account.objects.get(user=request.user)
+        try:
+            object = ObservationObjectChronology.objects.get(id = request.data.get('id'))
+        except:
+            return Response({'error':'invalid id: {0}'.format(request.data.get('id'))}, status=status.HTTP_400_BAD_REQUEST)
+
+        if object.author == account:
+            object.delete()
+        else:
+            return Response({'error':'forbiden'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response({}, status.HTTP_200_OK)
